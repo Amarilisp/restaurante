@@ -1,0 +1,62 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>  
+      	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    
+    <title>Pedidos Online</title>  
+    </head>  
+    <body>  
+    <p>  
+    <h1>Seu pedido nro: <span th:text=${idPedido}></span> &nbsp; Total Pedido: <span th:text=${totalPedido}></span> </h1>
+    <a href="/finalizar">Finalizar Pedido</a>
+    </p>  
+   <div style="width: 100%; overflow: hidden;">
+    <div style="width: 600px; float: left;">
+    <h3>Produtos Disponiveis</h3>
+    <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Descriçao</th>
+        <th>Valor</th>
+        <th style="text-align: center;">Opções</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="produto:${produtos}">
+        <td th:text=${produto.nomeProduto}>Produto</td>
+        <td th:text=${produto.preco}>Preço</td>
+        <td>
+        	<a th:href="@{/adicionar/{idPedido}/produto/{idProduto}(idPedido=${idPedido},idProduto=${produto.id})}" >Adicionar</a>
+        </td>
+      </tr>
+    </tbody>
+  </table></div>
+    <div style="margin-left: 620px;"> 
+        <h3>Produtos Selecionados</h3>
+    
+    <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Descriçao</th>
+        <th>Valor</th>
+        <th>Quantidade</th>
+        
+        <th style="text-align: center;">Opções</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="pedidoProduto:${pedidoProdutos}">
+        <td th:text=${pedidoProduto.nomeProduto}>Produto</td>
+        <td th:text=${pedidoProduto.preco}>Preço</td>
+       	<td th:text=${pedidoProduto.quantidade}>Quantidade</td>
+        
+        <td>
+        	<a th:href="@{/remover/{idPedido}/pedidoproduto/{idPedidoProduto}(idPedido=${idPedido},idPedidoProduto=${pedidoProduto.idPedidoProduto})}" >Remover</a>
+        </td>
+      </tr>
+    </tbody>
+  </table> </div>
+</div> 
+
+    </body>  
+    </html>  
